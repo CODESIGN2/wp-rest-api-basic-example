@@ -1,0 +1,28 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: "Test WordPress REST API Endpoint"
+host: "unknown"
+basePath: "/wp-json/test/v1"
+schemes:
+- "https"
+produces:
+- "application/json"
+paths:
+  /date:
+    get:
+      summary: "datetime"
+      description: "Retrieves an object representing current server datetime\n"
+      parameters: []
+      responses:
+        200:
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/inline_response_200"
+definitions:
+  inline_response_200:
+    properties:
+      now:
+        type: "string"
+        format: "datetime"
+        description: "Curent server datetime value"
