@@ -20,7 +20,7 @@ class TestController extends WP_REST_Controller {
                     'methods' => WP_REST_Server::READABLE,
                     'callback' => [$this, 'index'],
                     'permission_callback' => [$this, 'index_permissions_check'],
-                    'args' => [],,
+                    'args' => [],
                 ]
             ]
         );
