@@ -19,6 +19,14 @@ paths:
           description: "Successful response"
           schema:
             $ref: "#/definitions/inline_response_200"
+        403:
+          description: "Unauthorised request rejection"
+          schema:
+            $ref: "#/definitions/inline_response_err"
+        421:
+          description: "Too many requests rejection"
+          schema:
+            $ref: "#/definitions/inline_response_err"
 definitions:
   inline_response_200:
     properties:
@@ -26,3 +34,18 @@ definitions:
         type: "string"
         format: "datetime"
         description: "Curent server datetime value"
+  inline_response_err:
+    properties:
+      code:
+        type: string
+        description: "Error Type Code"
+      message:
+        type: string
+        description: "Error Message"
+      data:
+        type: object
+        properties:
+          status:
+            type: integer
+            description: "HTTP Error Code"
+    
