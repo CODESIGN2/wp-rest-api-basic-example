@@ -8,13 +8,31 @@ Author: CD2Team
 Author URI: https://www.codesign2.co.uk
 */
 
-add_action('rest_api_init', function(){
+namespace lewiscowles;
+
+\add_action('rest_api_init', function() {
+    error_reporting(E_ALL);
+    ini_set('display_errors', true);
     foreach([
         'Test'
     ] as $endpoint) {
         require_once( __DIR__."/controllers/{$endpoint}Controller.php");
-        $controller_class = "{$endpoint}Controller";
+        $controller_class = __NAMESPACE__."\\{$endpoint}Controller";
         $controller = new $controller_class();
         $controller->register_routes();
+    }
+});
+
+\add_action('wp_ajax_apinonce', function() {
+    die(\wp_create_nonce( 'wp_rest' ));
+});
+
+\spl_autoload_register( function($classname) {
+    $file = sprintf(
+        '%s/vendor/%s.php',
+        __DIR__, str_replace('\\', DIRECTORY_SEPARATOR, $classname)
+    );
+    if(file_exists($file)) {
+        require $file;
     }
 });
