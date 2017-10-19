@@ -48,4 +48,4 @@ definitions:
           status:
             type: integer
             description: "HTTP Error Code"
-    
+
