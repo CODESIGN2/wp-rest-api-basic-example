@@ -32,6 +32,15 @@ class TestController extends WP_REST_Controller {
     }
 
     public function index_permissions_check(WP_REST_Request $request) {
-        return true;
+        // Really basic example for permissions checking
+        // (https://codex.wordpress.org/Roles_and_Capabilities#read)
+        return $this->user_permission_check(get_current_user_id(), 'read'); 
+    }
+
+    public function user_permission_check($user_id='', $cap='admin') {
+        if(!empty($user_id)) {
+            return user_can($user_id, $cap);
+        }
+        return false;
     }
 }
